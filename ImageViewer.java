@@ -235,24 +235,11 @@ class ImageViewerFrame extends JFrame{
 		});
 	}
 	public void nextImage(int flag) {
-		File dir = new File(currentdirectry);
-		File[] list = dir.listFiles();
-		// System.out.println(list.length);
-		int rand = (new Random()).nextInt(list.length - 0 + 1) + 0;
-		String selected = list[rand].getPath();
-		label.setIcon(new ImageIcon(selected));
-
-		currentdirectry = new File(selected).getParent();
-		filename = new File(selected).getName();
-		absolutepath = selected;
-
-		model.add(0, filename);
-		
 		
 		int width = 0;
 		int height = 0;
 		try {
-			BufferedImage bimg = ImageIO.read(new File(selected));
+			BufferedImage bimg = ImageIO.read(new File(absolutepath));
 			width          = bimg.getWidth();
 			height         = bimg.getHeight();
 		}catch(Exception e) {
@@ -270,10 +257,12 @@ class ImageViewerFrame extends JFrame{
 			File csv = new File("C:\\Users\\Hijiri\\Desktop\\test.csv"); // CSVデータファイル
 			// 追記モード
 			BufferedWriter bw = new BufferedWriter(new FileWriter(csv, true));
-			// 新たなデータ行の追加
-			bw.write(filename + "," + width + "," + height + "," + flag);
-			bw.newLine();
-			bw.close();
+			// 新たなデータ行の追加			
+			if(width != 0) {
+				bw.write(flag + "," + width + "," + height + "," + filename);
+				bw.newLine();
+				bw.close();
+			}
 
 		} catch (FileNotFoundException e) {
 			// Fileオブジェクト生成時の例外捕捉
@@ -285,6 +274,20 @@ class ImageViewerFrame extends JFrame{
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
+		
+		
+		File dir = new File(currentdirectry);
+		File[] list = dir.listFiles();
+		// System.out.println(list.length);
+		int rand = (new Random()).nextInt(list.length - 0 + 1) + 0;
+		String selected = list[rand].getPath();
+		label.setIcon(new ImageIcon(selected));
+
+		currentdirectry = new File(selected).getParent();
+		filename = new File(selected).getName();
+		absolutepath = selected;
+
+		model.add(0, filename);
 		//System.out.println(Arrays.toString(model.toArray()));
 		// System.out.println(list2.length);
 		// System.out.println(list2[0].getPath());
