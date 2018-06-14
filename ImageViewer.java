@@ -10,6 +10,9 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.Random;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import java.awt.*;
 
 public class ImageViewer {
@@ -37,7 +40,7 @@ public class ImageViewer {
 @SuppressWarnings("serial")
 
 // A frame with a label to show an image
-class ImageViewerFrame extends JFrame {
+class ImageViewerFrame extends JFrame{
 
 	JLabel label; // label
 	JFileChooser chooser; // File Exploder
@@ -65,7 +68,12 @@ class ImageViewerFrame extends JFrame {
 
 	DefaultListModel model;
 	
+	JButton btn1;
+	JButton btn2;
+	JButton btn3;
+	
 	int flag = 0;
+	int total = 0;
 	// Constructor
 	public ImageViewerFrame() {
 
@@ -123,9 +131,9 @@ class ImageViewerFrame extends JFrame {
 		// add(button,BorderLayout.NORTH);
 
 		JPanel p = new JPanel();
-		JButton btn1 = new JButton("Not Valid");
-		JButton btn2 = new JButton("Back");
-		JButton btn3 = new JButton("Random");
+		btn1 = new JButton("Not Valid");
+		btn2 = new JButton("Back");
+		btn3 = new JButton("Random");
 		p.add(btn1);
 		p.add(btn2);
 		p.add(btn3);
@@ -250,9 +258,11 @@ class ImageViewerFrame extends JFrame {
 		}catch(Exception e) {
 			
 		}
-		System.out.println(width);
-		System.out.println(height);
-		
+		//System.out.println(width);
+		//System.out.println(height);
+		if(flag == 1) {
+			System.out.println(++total);
+		}
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
